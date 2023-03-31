@@ -1,0 +1,136 @@
+body {
+  box-sizing: border-box;
+}
+
+.container {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  height: 97vh;
+}
+
+.vertical-box {
+  background: black;
+  border: 1px solid #f0ffff;
+  border-radius: 30px;
+  height: 82%;
+  width: 18%;
+}
+
+@media screen and (max-width: 1024px) {
+  .vertical-box {
+    height: 73%;
+    width: 23%;
+  }
+}
+
+.input-field {
+  height: 140px;
+  width: 95%;
+}
+
+h1 {
+  color: white;
+  font-size: 50px;
+  font-weight: 400;
+  position: relative;
+  left: 82%;
+  top: 60%;
+}
+
+.circle {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin: 10px;
+}
+
+.number {
+  background: rgba(26, 25, 25, 0.918);
+  border-radius: 50%;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 18px;
+  padding: 10px 15px;
+}
+
+.operator {
+  background: orange;
+  border: none;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 18px;
+  padding: 10px 15px;
+}
+
+.restart {
+  background: gray;
+  border: none;
+  border-radius: 50%;
+  color: black;
+  cursor: pointer;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 15px;
+  padding: 12px 10px;
+}
+
+.plusmin {
+  background: gray;
+  border: none;
+  border-radius: 50%;
+  color: black;
+  cursor: pointer;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 15px;
+  padding: 12px 11px;
+}
+
+.percent {
+  background: gray;
+  border: none;
+  border-radius: 50%;
+  color: black;
+  cursor: pointer;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 18px;
+  padding: 10px 12px;
+}
+
+.zero {
+  background: rgba(26, 25, 25, 0.918);
+  border: none;
+  border-radius: 20px;
+  color: white;
+  cursor: pointer;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 18px;
+  padding: 7px 38px;
+}
+
+.dot {
+  background: rgba(26, 25, 25, 0.918);
+  border: none;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 18px;
+  padding: 10px 18px;
+}
+
+@media screen and (max-width: 768px) {
+  .vertical-box {
+    height: 95%;
+    width: 30%;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .vertical-box {
+    width: 55%;
+  }
+}
