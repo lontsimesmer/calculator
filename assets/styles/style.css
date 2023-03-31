@@ -46,7 +46,7 @@ h1 {
 }
 
 .number {
-  background: rgba(26, 25, 25, 0.918);
+  background: #1a1919;
   border-radius: 50%;
   border: none;
   color: white;
@@ -101,7 +101,7 @@ h1 {
 }
 
 .zero {
-  background: rgba(26, 25, 25, 0.918);
+  background: #1a1919;
   border: none;
   border-radius: 20px;
   color: white;
@@ -112,7 +112,7 @@ h1 {
 }
 
 .dot {
-  background: rgba(26, 25, 25, 0.918);
+  background: #1a1919;
   border: none;
   border-radius: 50%;
   color: white;
