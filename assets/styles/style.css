@@ -25,15 +25,14 @@ body {
 }
 
 .input-field {
-  background: #1a1919;
   color: white;
-  font-size: 30px;
+  font-size: 37px;
   font-weight: 400;
-  height: 155px;
+  height: 50px;
   margin: 20px;
-  /* left: 78%;
-  position: relative;
-  top: 20%; */
+  overflow-x: auto;
+  padding-left: 10px;
+  padding-top: 100px;
   width: 84%;
 }
 
@@ -44,7 +43,7 @@ body {
   margin: 10px;
 }
 
-.number {
+.numbers {
   background: #1a1919;
   border-radius: 50%;
   border: none;
@@ -55,7 +54,7 @@ body {
   padding: 10px 15px;
 }
 
-.operator {
+.operators {
   background: orange;
   border: none;
   border-radius: 50%;
