@@ -1,100 +1,99 @@
-const input = document.getElementById("input"),
-  result = document.getElementById("result"),
-  restart = document.getElementById("restart"),
-  number = document.querySelectorAll(".numbers"),
-  operator = document.querySelectorAll(".operators"),
-  displayResults = false;
+const input = document.getElementById('input')
+const result = document.getElementById('result')
+const number = document.querySelectorAll('.numbers')
+const operator = document.querySelectorAll('.operators')
+const displayResults = false
 
 for (let i = 0; i < number.length; i++) {
-  number[i].addEventListener("click", function (e) {
-    const currentString = input.innerHTML,
-      lastCharacter = currentString[currentString.length - 1];
+  number[i].addEventListener('click', function (e) {
+    const currentString = input.innerHTML
+    const lastCharacter = currentString[currentString.length - 1]
 
     if (displayResults === false) {
-      input.innerHTML += e.target.innerHTML;
+      input.innerHTML += e.target.innerHTML
     } else if (
-      (displayResults === true && lastCharacter === "÷") ||
-      lastCharacter === "*" ||
-      lastCharacter === "-" ||
-      lastCharacter === "+"
+      (displayResults === true && lastCharacter === '÷') ||
+      lastCharacter === '*' ||
+      lastCharacter === '-' ||
+      lastCharacter === '+'
     ) {
-      displayResults = false;
-      input.innerHTML += e.target.innerHTML;
+      displayResults = false
+      input.innerHTML += e.target.innerHTML
     } else {
-      displayResults = false;
-      input.innerHTML = "0";
-      input.innerHTML += e.target.innerHTML;
+      displayResults = false
+      input.innerHTML = '0'
+      input.innerHTML += e.target.innerHTML
     }
-    console.log(displayResults);
-  });
+    console.log(displayResults)
+  })
 }
 
 for (let i = 0; i < operator.length; i++) {
-  operator[i].addEventListener("click", function (e) {
-    const currentString = input.innerHTML,
-      lastOperator = currentString[currentString.length - 1];
+  operator[i].addEventListener('click', function (e) {
+    const currentString = input.innerHTML
+    const lastOperator = currentString[currentString.length - 1]
     if (
-      lastOperator === "÷" ||
-      lastOperator === "*" ||
-      lastOperator === "-" ||
-      lastOperator === "+"
+      lastOperator === '÷' ||
+      lastOperator === '*' ||
+      lastOperator === '-' ||
+      lastOperator === '+'
     ) {
       const newString =
         currentString.substring(0, currentString.length - 1) +
-        e.target.innerHTML;
-      input.innerHTML = newString;
+        e.target.innerHTML
+      input.innerHTML = newString
     } else if (currentString === 0) {
-      console.log("enter any false number");
+      console.log('enter any false number')
     } else {
-      input.innerHTML += e.target.innerHTML;
+      input.innerHTML += e.target.innerHTML
     }
-  });
+  })
 }
 
-result.addEventListener("click", function () {
-  const inputString = this.innerHTML;
-  const numbers = inputString.split(/\÷|\*|\-|\+/g);
-  const operators = inputString.replace(/[0-9]|\./g, "").split("");
-  console.log(inputString);
-  console.log(numbers);
-  console.log(operators);
+result.addEventListener('click', function () {
+  const inputString = this.innerHTML
+  const numbers = inputString.split(/\÷|\*|\-|\+/g)
+  const operators = inputString.replace(/[0-9]|\./g, '').split('')
+  console.log(inputString)
+  console.log(numbers)
+  console.log(operators)
 
-  const divide = operators.indexOf("÷");
+  const divide = operators.indexOf('÷')
   while (divide != -1) {
-    numbers.splice(divide, 2, numbers[divide] / numbers[divide + 1]);
-    operators.splice(divide, 1);
-    divide = operators.indexOf("÷");
+    numbers.splice(divide, 2, numbers[divide] / numbers[divide + 1])
+    operators.splice(divide, 1)
+    divide = operators.indexOf('÷')
   }
 
-  const multiply = operators.indexOf("*");
+  const multiply = operators.indexOf('*')
   while (multiply != -1) {
-    numbers.splice(multiply, 2, numbers[multiply] * numbers[multiply + 1]);
-    operators.splice(multiply, 1);
-    multiply = operators.indexOf("*");
+    numbers.splice(multiply, 2, numbers[multiply] * numbers[multiply + 1])
+    operators.splice(multiply, 1)
+    multiply = operators.indexOf('*')
   }
 
-  const subtract = operators.indexOf("-");
+  const subtract = operators.indexOf('-')
   while (subtract != -1) {
-    numbers.splice(subtract, 2, numbers[subtract] - numbers[subtract + 1]);
-    operators.splice(subtract, 1);
-    subtract = operators.indexOf("-");
+    numbers.splice(subtract, 2, numbers[subtract] - numbers[subtract + 1])
+    operators.splice(subtract, 1)
+    subtract = operators.indexOf('-')
   }
 
-  const add = operators.indexOf("+");
+  const add = operators.indexOf('+')
   while (add != -1) {
     numbers.splice(
       add,
       2,
       parseFloat(numbers[add]) + parseFloat(numbers[add + 1])
-    );
-    operators.splice(add, 1);
-    add = operators.indexOf("+");
+    )
+    operators.splice(add, 1)
+    add = operators.indexOf('+')
   }
 
-  input.innerHTML = numbers[0];
+  input.innerHTML = numbers[0]
 
-  displayResults = true;
-});
+  displayResults = true
+})
 
 // andela personal evaluation form
 
