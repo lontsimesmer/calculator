@@ -53,18 +53,18 @@ for (let i = 0; i < operator.length; i++) {
 
 result.addEventListener('click', function () {
   const inputString = this.innerHTML
-  //eslint-disable-next-line
+  // eslint-disable-next-line
   const numbers = inputString.split(/\÷|\*|\-|\+/g)
   const operators = inputString.replace(/[0-9]|\./g, '').split('')
   console.log(inputString)
   console.log(numbers)
   console.log(operators)
 
-  //eslint-disable-next-line
   const divide = operators.indexOf('÷')
   while (divide !== -1) {
     numbers.splice(divide, 2, numbers[divide] / numbers[divide + 1])
     operators.splice(divide, 1)
+    // eslint-disable-next-line
     divide = operators.indexOf('÷')
   }
 
@@ -72,6 +72,7 @@ result.addEventListener('click', function () {
   while (multiply !== -1) {
     numbers.splice(multiply, 2, numbers[multiply] * numbers[multiply + 1])
     operators.splice(multiply, 1)
+    // eslint-disable-next-line
     multiply = operators.indexOf('*')
   }
 
@@ -79,6 +80,7 @@ result.addEventListener('click', function () {
   while (subtract !== -1) {
     numbers.splice(subtract, 2, numbers[subtract] - numbers[subtract + 1])
     operators.splice(subtract, 1)
+    // eslint-disable-next-line
     subtract = operators.indexOf('-')
   }
 
@@ -90,6 +92,7 @@ result.addEventListener('click', function () {
       parseFloat(numbers[add]) + parseFloat(numbers[add + 1])
     )
     operators.splice(add, 1)
+    // eslint-disable-next-line
     add = operators.indexOf('+')
   }
 
