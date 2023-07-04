@@ -17,7 +17,7 @@ function allClear () {
   currentOperation = ''
 }
 
-// Append number to screen when button is pressed
+// Display number on screen when button is pressed
 function appendNumber (number) {
   const x = currentDisplay.textContent += number
   if (
