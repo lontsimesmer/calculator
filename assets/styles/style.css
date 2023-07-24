@@ -1,6 +1,8 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
+
 * {
   box-sizing: border-box;
-  font-family: system-ui, "Segoe UI", "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 body {
@@ -33,20 +35,14 @@ body {
   color: #fff;
   display: flex;
   flex-direction: row;
-  font-weight: 100;
+  font-size: 50px;
+  font-weight: 300;
   height: 200px;
   justify-content: flex-end;
   left: 3%;
+  pointer-events: none;
   position: relative;
   width: 200px;
-}
-
-.curr-display {
-  font-size: 40px;
-}
-
-.prev-display {
-  display: none;
 }
 
 .button-container {
@@ -57,38 +53,34 @@ body {
 .row {
   display: flex;
   justify-content: center;
-  margin: 0;
 }
 
 button {
   border: none;
   border-radius: 50%;
   cursor: pointer;
-  font-weight: 300;
   font-size: 24px;
+  font-weight: 400;
   height: 50px;
   margin: 5px;
   text-align: center;
   width: 50px;
 }
 
-.sign-delet {
+.signs {
   background-color: #808080;
   font-size: 20px;
-  font-weight: 400;
 }
 
 .operators,
 .equal {
   background-color: #ffa500;
   color: #fff;
-  font-weight: 400;
 }
 
 #percentage {
   background-color: #808080;
   color: #000;
-  font-weight: 400;
 }
 
 .numbers {

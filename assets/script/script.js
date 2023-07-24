@@ -1,111 +1,165 @@
-const numberBtn = document.querySelectorAll('.numbers')
-const AC = document.getElementById('ac')
-const plusMinus = document.getElementById('plusminus')
-const operationBtn = document.querySelectorAll('.operators')
-const equals = document.getElementById('equality')
-const currentDisplay = document.querySelector('#curr-display')
-const previousDisplay = document.querySelector('#prev-display')
+// Get DOM elements
 
-let currentOperation = ''
+const displayEl = document.querySelector('.display')
 
-allClear()
+const acEl = document.getElementById('ac')
+const plusminEl = document.getElementById('plusminus')
+const percentEl = document.getElementById('percentage')
 
-// Clear the calculator
-function allClear () {
-  currentDisplay.textContent = ''
-  previousDisplay.textContent = ''
-  currentOperation = ''
+const divideEl = document.getElementById('division')
+const timesEl = document.getElementById('multiplication')
+const minusEl = document.getElementById('subtraction')
+const plusEl = document.getElementById('addition')
+const equalEl = document.getElementById('equality')
+
+const pointEl = document.getElementById('number-dot')
+const num0El = document.getElementById('number0')
+const num1El = document.getElementById('number1')
+const num2El = document.getElementById('number2')
+const num3El = document.getElementById('number3')
+const num4El = document.getElementById('number4')
+const num5El = document.getElementById('number5')
+const num6El = document.getElementById('number6')
+const num7El = document.getElementById('number7')
+const num8El = document.getElementById('number8')
+const num9El = document.getElementById('number9')
+const numElArr = [
+  num0El, num1El, num2El, num3El, num4El,
+  num5El, num6El, num7El, num8El, num9El
+]
+
+// Call the two used variables
+
+let valueStrInMemo = null
+let operatorInMemo = null
+
+// Functions that operate on whole numbers and join them
+
+const getStrValue = () => displayEl.textContent.split(',').join('')
+
+const getNumValue = () => {
+  return parseFloat(getStrValue())
 }
 
-// Display number on screen when button is pressed
-function appendNumber (number) {
-  const x = currentDisplay.textContent += number
-  if (
-    x.toString[0] === '0' &&
-    x.toString[1] === '0'
-  ) {
-    x.toString = '0'
-  }
-}
-
-// Update operations
-function updateOperation (operation) {
-  currentOperation = operation
-  if (currentDisplay.textContent !== '' && previousDisplay.textContent !== '') {
+const setStrValue = (valueStr) => {
+  if (valueStr[valueStr.length - 1] === '.') {
+    displayEl.textContent += '.'
     return
   }
-  if (currentDisplay.textContent !== '') {
-    previousDisplay.textContent = currentDisplay.textContent
-    currentDisplay.textContent = ''
-  }
-}
 
-// Perform calculation and update display
-function calculate () {
-  let result = ''
-  const b = Number(currentDisplay.textContent)
-  const a = Number(previousDisplay.textContent)
-  console.log(a, b, currentOperation)
-
-  switch (currentOperation) {
-    case 'addition':
-      result = a + b
-      break
-    case 'subtraction':
-      result = a - b
-      break
-    case 'multiplication':
-      result = a * b
-      break
-    case 'division':
-      result = a / b
-      break
-    case 'percentage':
-      result = a * (b / 100)
-      break
-  }
-  currentDisplay.textContent = result
-  previousDisplay.textContent = ''
-  currentOperation = 'equals'
-}
-
-// Change the sign of currentDisplay
-function changeSign () {
-  const b = Number(currentDisplay.textContent)
-  if (b >= 0) {
-    currentDisplay.textContent = '-' + currentDisplay.textContent
+  const [wholeNumStr, decimalStr] = valueStr.split('.')
+  if (decimalStr) {
+    displayEl.textContent =
+      parseFloat(wholeNumStr).toLocaleString() + '.' + decimalStr
   } else {
-    currentDisplay.textContent = currentDisplay.textContent.substring(1)
+    displayEl.textContent = parseFloat(wholeNumStr).toLocaleString()
   }
 }
 
-AC.addEventListener('click', allClear)
+const handleNumClick = (numStr) => {
+  const currStrValue = getStrValue()
+  if (currStrValue === '0') {
+    setStrValue(numStr)
+  } else {
+    setStrValue(currStrValue + numStr)
+  }
+}
 
-// Number buttons
-numberBtn.forEach((button) => {
-  button.addEventListener('click', () => {
-    if (currentOperation === 'equals') {
-      allClear()
-      appendNumber(button.textContent)
-    } else {
-      appendNumber(button.textContent)
-    }
+// Function that enables operators to work
+
+const getOperationResults = () => {
+  const currNumValue = getNumValue()
+  const valueNumInMemo = parseFloat(valueStrInMemo)
+  let newValueNum
+  if (operatorInMemo === 'division') {
+    newValueNum = valueNumInMemo / currNumValue
+  } else if (operatorInMemo === 'multiplication') {
+    newValueNum = valueNumInMemo * currNumValue
+  } else if (operatorInMemo === 'subtraction') {
+    newValueNum = valueNumInMemo - currNumValue
+  } else if (operatorInMemo === 'addition') {
+    newValueNum = valueNumInMemo + currNumValue
+  }
+
+  return newValueNum.toString()
+}
+
+const handleClickOperator = (operation) => {
+  const currStrValue = getStrValue()
+
+  if (!valueStrInMemo) {
+    valueStrInMemo = currStrValue
+    operatorInMemo = operation
+    setStrValue('0')
+    return
+  }
+  valueStrInMemo = getOperationResults()
+  operatorInMemo = operation
+  setStrValue('0')
+}
+
+// Add event listeners to signs
+
+acEl.addEventListener('click', () => {
+  setStrValue('0')
+  valueStrInMemo = null
+  operatorInMemo = null
+})
+plusminEl.addEventListener('click', () => {
+  const currNumValue = getNumValue()
+  const currStrValue = getStrValue()
+
+  if (currStrValue === '-0') {
+    setStrValue('0')
+    return
+  }
+  if (currNumValue >= 0) {
+    setStrValue('-' + currStrValue)
+  } else {
+    setStrValue(currStrValue.substring(1))
+  }
+})
+percentEl.addEventListener('click', () => {
+  const currNumValue = getNumValue()
+  const newValueNum = currNumValue / 100
+  setStrValue(newValueNum.toString())
+  valueStrInMemo = null
+  operatorInMemo = null
+})
+
+// Add event listeners to operators
+
+divideEl.addEventListener('click', () => {
+  handleClickOperator('division')
+})
+timesEl.addEventListener('click', () => {
+  handleClickOperator('multiplication')
+})
+minusEl.addEventListener('click', () => {
+  handleClickOperator('subtraction')
+})
+plusEl.addEventListener('click', () => {
+  handleClickOperator('addition')
+})
+equalEl.addEventListener('click', () => {
+  if (valueStrInMemo) {
+    setStrValue(getOperationResults())
+    valueStrInMemo = null
+    operatorInMemo = null
+  }
+})
+
+// Add event listeners to numbers and decimal
+
+for (let i = 0; i < numElArr.length; i++) {
+  const numberEl = numElArr[i]
+  numberEl.addEventListener('click', () => {
+    handleNumClick(i.toString())
   })
-})
-
-// Operation buttons
-operationBtn.forEach((button) => {
-  button.addEventListener('click', () => {
-    updateOperation(button.id)
-  })
-})
-
-// Equals button
-equals.addEventListener('click', () => {
-  calculate()
-})
-
-// Plus or minus button
-plusMinus.addEventListener('click', () => {
-  changeSign()
+}
+pointEl.addEventListener('click', () => {
+  const currStrValue = getStrValue()
+  if (!currStrValue.includes('.')) {
+    setStrValue(currStrValue + '.')
+  }
 })
